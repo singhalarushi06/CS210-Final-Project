@@ -47,5 +47,7 @@ def clean_data(df):
     
     return df_clean
 
+df = pd.read_csv('data\\Collisions_sample_100k.csv', low_memory=False)
+print(f"Before cleaning: {df.shape}")
 df_clean = clean_data(df)
 print(f"After cleaning: {df_clean.shape}")
