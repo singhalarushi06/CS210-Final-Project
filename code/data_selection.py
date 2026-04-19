@@ -19,4 +19,5 @@ print(f"Saved {sample_size:,} random rows to 'data\\Collisions_sample_100k.csv'"
 
 # NOTE: the original dataset has more than 1M rows, so we are deleting the full dataset from memory to free up resources
 # ANOTHER NOTE: the 500k rows was also too much, so that is also being deleted
+
 del df_full
