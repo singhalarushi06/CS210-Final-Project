@@ -20,7 +20,7 @@ import joblib
 print("NYC VEHICLE COLLISIONS - SEVERITY PREDICTION MODEL")
 
 print("\nLoading dataset...")
-df = pd.read_csv('data\\cleaned_100k.csv', low_memory=False)
+df = pd.read_csv('data\\collisions_clean.csv', low_memory=False)
 print(f"Dataset loaded with {df.shape[0]:,} rows and {df.shape[1]} columns.")
 
 
