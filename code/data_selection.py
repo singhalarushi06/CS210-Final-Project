@@ -1,3 +1,6 @@
+# Part 1: Data Selection + Sampling
+# CS210 - NYC Motor Vehicle Collisions
+
 import pandas as pd
 import numpy as np
 

@@ -1,3 +1,6 @@
+# Part 4: Modeling + Evaluation
+# CS210 - NYC Motor Vehicle Collisions
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt

@@ -1,4 +1,4 @@
-# Part 1: Data Cleaning + Feature Engineering
+# Part 2: Data Cleaning + Feature Engineering
 # CS210 - NYC Motor Vehicle Collisions
 
 import pandas as pd

@@ -1,4 +1,4 @@
-# Part 2: Exploratory Data Analysis
+# Part 3: Exploratory Data Analysis
 # CS210 - NYC Motor Vehicle Collisions
 
 import pandas as pd
