@@ -1,7 +1,8 @@
 # CS210-Final-Project
 
-**Group Members:** Arushi Singhal, Venkat Aditya Mullagiri, Yug Patel
-**Project Topic:** NY Vehicle Collision Analysis
+**Group Members:** Arushi Singhal, Venkat Aditya Mullagiri, Yug Patel <br>
+**Project Topic:** NY Vehicle Collision Analysis <br>
+**Due Date:** Monday, May 4th, 2026
 
 ## Project Overview
 The goal of this project was to predict the accident severity based on various time-related factors. We analyzed a sample of 100k (out of more than 2 million) NYC motor vehicle collisions to identify any patterns in the accident severity, and understand the impacts for further analysis of the severity of crashes.
