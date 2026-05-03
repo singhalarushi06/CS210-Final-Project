@@ -159,14 +159,31 @@ df["num_vehicles"] = df[vehicle_cols].notna().sum(axis=1)
 numeric_cols = [c for c in df.columns if "number_of" in c]
 df[numeric_cols] = df[numeric_cols].fillna(0)
 
-# severity score and binary label
-# deaths count 5x more than injuries
+# to improve the modeling, we are adjusting the metric of the SEVERITY SCORE
+# start by calculating the total number of injuries and fatalities
+df["total_injuries"] = (
+    df["number_of_persons_injured"] +
+    df["number_of_pedestrians_injured"] +
+    df["number_of_cyclist_injured"] +
+    df["number_of_motorist_injured"]
+)
+df["total_fatalities"] = (
+    df["number_of_persons_killed"] +
+    df["number_of_pedestrians_killed"] +
+    df["number_of_cyclist_killed"] +
+    df["number_of_motorist_killed"]
+)
+# let's increase the score for fatalities a bit more than before
 df["severity_score"] = (
     df["number_of_persons_injured"] * 1 +
-    df["number_of_persons_killed"]  * 5
+    df["number_of_persons_killed"]  * 10
 )
-# 1 = someone got hurt or killed, 0 = nobody did
-df["is_severe"] = (df["severity_score"] > 0).astype(int)
+# let's modify the binary target variable
+# we say it is severe if it has 2 or more injuries, or at least 1 fatality - this is a more meaningful definition of severity than the original one which only looked at fatalities
+df["is_severe"] = (
+    (df["total_injuries"] >= 2) | 
+    (df["total_fatalities"] >= 1)
+).astype(int)
 
 # drop rows missing critical info
 df = df.dropna(subset=["hour", "crash_date"])
