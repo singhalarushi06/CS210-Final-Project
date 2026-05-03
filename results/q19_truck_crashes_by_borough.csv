@@ -1,0 +1,6 @@
+borough,truck_crashes,avg_severity,severe_crashes
+BROOKLYN,1386,0.485,449
+QUEENS,874,0.487,290
+MANHATTAN,814,0.356,243
+BRONX,545,0.563,204
+STATEN ISLAND,178,0.449,52

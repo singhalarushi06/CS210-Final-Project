@@ -1,0 +1,6 @@
+borough,late_night_crashes,avg_severity,pct_severe
+BROOKLYN,3250,0.584,37.6
+QUEENS,2585,0.463,31.1
+MANHATTAN,1739,0.553,37.9
+BRONX,1540,0.558,35.4
+STATEN ISLAND,297,0.374,27.9

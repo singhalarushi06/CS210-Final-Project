@@ -1,0 +1,3 @@
+time_period,total_crashes,avg_severity,severe_crashes,pct_severe
+Normal Hours,87483,0.602,37169,42.5
+Late Night (12am-5am),12517,0.597,4688,37.5

@@ -4,9 +4,13 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import os
+
+# BASE points to the CS210-Final-Project folder regardless of where you run the script from
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # load the cleaned data
-df = pd.read_csv("data\\collisions_clean.csv")
+df = pd.read_csv(BASE + "\\data\\collisions_clean.csv")
 print(f"loaded {df.shape[0]:,} rows, making graphs now")
 
 sns.set_theme(style="whitegrid", palette="muted")
@@ -22,7 +26,7 @@ ax.set_ylabel("Number of Crashes")
 ax.set_title("Crashes by Hour of Day")
 ax.set_xticks(range(0, 24))
 plt.tight_layout()
-plt.savefig("plots\\plot1_crashes_by_hour.png")
+plt.savefig(BASE + "\\plots\\plot1_crashes_by_hour.png")
 plt.show()
 print("saved plot1")
 
@@ -36,7 +40,7 @@ ax.set_ylabel("Avg Severity Score")
 ax.set_title("Average Crash Severity by Hour of Day")
 ax.set_xticks(range(0, 24))
 plt.tight_layout()
-plt.savefig("plots\\plot2_severity_by_hour.png")
+plt.savefig(BASE + "\\plots\\plot2_severity_by_hour.png")
 plt.show()
 print("saved plot2")
 
@@ -51,7 +55,7 @@ ax.set_ylabel("Avg Severity Score")
 ax.set_title("Rush Hour vs Non Rush Hour — Average Severity")
 ax.set_xticklabels(rush_sev.index, rotation=0)
 plt.tight_layout()
-plt.savefig("plots\\plot3_rush_hour_severity.png")
+plt.savefig(BASE + "\\plots\\plot3_rush_hour_severity.png")
 plt.show()
 print("saved plot3")
 
@@ -66,7 +70,7 @@ ax.set_ylabel("Avg Severity Score")
 ax.set_title("Weekday vs Weekend — Average Severity")
 ax.set_xticklabels(weekend_sev.index, rotation=0)
 plt.tight_layout()
-plt.savefig("plots\\plot4_weekend_severity.png")
+plt.savefig(BASE + "\\plots\\plot4_weekend_severity.png")
 plt.show()
 print("saved plot4")
 
@@ -81,7 +85,7 @@ ax.set_ylabel("Avg Severity Score")
 ax.set_title("Late Night Driving vs Normal Hours — Average Severity")
 ax.set_xticklabels(night_sev.index, rotation=0)
 plt.tight_layout()
-plt.savefig("plots\\plot5_night_severity.png")
+plt.savefig(BASE + "\\plots\\plot5_night_severity.png")
 plt.show()
 print("saved plot5")
 
@@ -99,7 +103,7 @@ ax.set_ylabel("Number of Crashes")
 ax.set_title("Total Crashes by Borough")
 ax.set_xticklabels(borough_counts.index, rotation=15, ha="right")
 plt.tight_layout()
-plt.savefig("plots\\plot6_crashes_by_borough.png")
+plt.savefig(BASE + "\\plots\\plot6_crashes_by_borough.png")
 plt.show()
 print("saved plot6")
 
@@ -111,7 +115,7 @@ factor_counts.plot(kind="barh", ax=ax, color="slateblue", edgecolor="white")
 ax.set_xlabel("Number of Crashes")
 ax.set_title("Crashes by Contributing Factor Group")
 plt.tight_layout()
-plt.savefig("plots\\plot7_factor_groups.png")
+plt.savefig(BASE + "\\plots\\plot7_factor_groups.png")
 plt.show()
 print("saved plot7")
 
@@ -128,7 +132,7 @@ factor_sev.plot(kind="barh", ax=ax, color="tomato", edgecolor="white")
 ax.set_xlabel("Avg Severity Score")
 ax.set_title("Average Crash Severity by Contributing Factor Group")
 plt.tight_layout()
-plt.savefig("plots\\plot8_factor_severity.png")
+plt.savefig(BASE + "\\plots\\plot8_factor_severity.png")
 plt.show()
 print("saved plot8")
 
@@ -142,7 +146,7 @@ ax.set_ylabel("Avg Severity Score")
 ax.set_title("Number of Vehicles Involved vs Average Severity")
 ax.set_xticklabels(vehicle_sev.index, rotation=0)
 plt.tight_layout()
-plt.savefig("plots\\plot9_num_vehicles_severity.png")
+plt.savefig(BASE + "\\plots\\plot9_num_vehicles_severity.png")
 plt.show()
 print("saved plot9")
 
@@ -157,7 +161,7 @@ if "number_of_cyclist_injured" in df.columns:
     ax.set_title("Cyclist Injuries by Hour of Day")
     ax.set_xticks(range(0, 24))
     plt.tight_layout()
-    plt.savefig("plots\\plot10_cyclist_injuries.png")
+    plt.savefig(BASE + "\\plots\\plot10_cyclist_injuries.png")
     plt.show()
     print("saved plot10")
 

@@ -1,0 +1,7 @@
+factor_group,total_crashes,avg_severity,severe_crashes,pct_severe
+Failure to Yield,9020,0.958,6268,69.5
+Speeding,3145,0.929,1612,51.3
+Fatigue,517,0.671,218,42.2
+Weather/Road,1151,0.614,480,41.7
+Distraction,24697,0.61,10796,43.7
+Alcohol/Drugs,1973,0.58,720,36.5

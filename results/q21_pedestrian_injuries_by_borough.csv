@@ -1,0 +1,6 @@
+borough,total_pedestrians_injured,total_pedestrians_killed,total_crashes,avg_injured_per_crash
+BROOKLYN,3224,43,28065,0.1149
+QUEENS,2319,27,20566,0.1128
+MANHATTAN,2083,18,15309,0.1361
+BRONX,1536,14,12077,0.1272
+STATEN ISLAND,260,4,3184,0.0817

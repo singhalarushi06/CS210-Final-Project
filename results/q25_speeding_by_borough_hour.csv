@@ -1,0 +1,16 @@
+borough,time_of_day,speeding_crashes,avg_severity
+BROOKLYN,Midday,166,0.916
+QUEENS,Late Night,161,0.46
+BROOKLYN,Evening Rush,157,0.924
+BROOKLYN,Late Night,153,0.771
+BROOKLYN,Night,144,0.882
+QUEENS,Midday,132,0.629
+BRONX,Evening Rush,127,0.89
+QUEENS,Night,121,0.777
+BRONX,Midday,118,0.847
+QUEENS,Evening Rush,115,0.6
+BRONX,Late Night,104,0.981
+BROOKLYN,Morning Rush,102,0.637
+BRONX,Night,92,0.804
+QUEENS,Morning Rush,84,0.714
+BRONX,Morning Rush,79,0.671

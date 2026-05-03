@@ -1,0 +1,6 @@
+borough,alcohol_night_crashes,avg_severity
+QUEENS,202,0.564
+BROOKLYN,188,0.452
+BRONX,111,0.477
+MANHATTAN,90,0.544
+STATEN ISLAND,30,0.433

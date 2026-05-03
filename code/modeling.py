@@ -20,12 +20,16 @@ from sklearn.utils.class_weight import compute_sample_weight
 import warnings
 warnings.filterwarnings('ignore')
 import joblib
+import os
+
+# BASE points to the CS210-Final-Project folder regardless of where you run the script from
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 print("NYC VEHICLE COLLISIONS - SEVERITY PREDICTION MODEL")
 
 # Load the cleaned dataset
 print("\nLoading dataset...")
-df = pd.read_csv('data\\collisions_clean.csv', low_memory=False)
+df = pd.read_csv(BASE + '\\data\\collisions_clean.csv', low_memory=False)
 print(f"Dataset loaded with {df.shape[0]:,} rows and {df.shape[1]} columns.")
 
 # Check the distribution of the target variable

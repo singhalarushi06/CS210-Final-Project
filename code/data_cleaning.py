@@ -4,11 +4,15 @@
 import pandas as pd
 import numpy as np
 import re
+import os
+
+# BASE points to the CS210-Final-Project folder regardless of where you run the script from
+BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # load the smaller dataset from the data selection step
 # this is already a random sample of the full data, so we can skip straight to cleaning
 print("loading dataset, give it a sec...")
-df = pd.read_csv("data\\Collisions_sample_100k.csv", low_memory=False)
+df = pd.read_csv(BASE + "\\data\\Collisions_sample_100k.csv", low_memory=False)
 print(f"size: {df.shape}")
 
 # rename columns IMMEDIATELY - csv comes with caps + spaces like "CRASH TIME"
@@ -191,7 +195,35 @@ print(f"\nfinal shape after all cleaning: {df.shape}")
 print(f"severe crashes: {df['is_severe'].sum():,} / {len(df):,} ({df['is_severe'].mean():.1%})")
 
 # save it
-df.to_csv("data\\collisions_clean.csv", index=False)
+df.to_csv(BASE + "\\data\\collisions_clean.csv", index=False)
 print("\nsaved -> collisions_clean.csv")
 print(df[["crash_date", "hour", "is_rush_hour", "is_weekend",
           "factor_group", "num_vehicles", "severity_score"]].head(8))
+
+# SAVE TO SQLITE DATABASE
+# doing this here since the dataframe is already in memory, no need for a separate file
+import sqlite3
+
+db_path = BASE + "\\data\\collisions.db"
+conn = sqlite3.connect(db_path)
+
+# load the full cleaned dataframe into a table called crashes
+df.to_sql("crashes", conn, if_exists="replace", index=False)
+print(f"\nsaved {len(df):,} rows to 'crashes' table in {db_path}")
+
+# also create a borough + hour summary table for quick lookups
+summary_df = pd.read_sql("""
+    SELECT 
+        borough,
+        hour,
+        COUNT(*) as total_crashes,
+        ROUND(AVG(severity_score), 3) as avg_severity,
+        SUM(is_severe) as severe_crashes
+    FROM crashes
+    GROUP BY borough, hour
+""", conn)
+summary_df.to_sql("borough_hour_summary", conn, if_exists="replace", index=False)
+print(f"created summary table with {len(summary_df):,} rows")
+
+conn.close()
+print("database saved -> " + BASE + "\\data\\collisions.db")
