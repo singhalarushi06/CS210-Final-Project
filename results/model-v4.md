@@ -48,11 +48,12 @@ AdaBoost:
    Balanced Accuracy: 0.5053
    AUC-ROC: 0.6327
 
-              Model  Accuracy  Balanced Accuracy  AUC-ROC
-Logistic Regression   0.64025           0.596240 0.631324
-  Gradient Boosting   0.64830           0.595788 0.635173
-      Random Forest   0.72145           0.547577 0.597572
-           AdaBoost   0.76745           0.505289 0.632668
+| Model | Accuracy | Balanced Accuracy | AUC-ROC |
+| ---- | ---- | ---- | ---- | 
+| Logistic Regression | 0.64025 | 0.596240 | 0.631324 |
+| Gradient Boosting | 0.64830 | 0.595788 | 0.635173 |
+| Random Forest | 0.72145 | 0.547577 | 0.597572 |
+| AdaBoost | 0.76745 | 0.505289 | 0.632668 |
 
  BEST MODEL: Logistic Regression
    Balanced Accuracy: 0.5962
