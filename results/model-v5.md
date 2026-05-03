@@ -1,4 +1,4 @@
-#Version 4 of the model
+#Version 5 of the model
 
 **NYC VEHICLE COLLISIONS - SEVERITY PREDICTION MODEL**
 
@@ -14,7 +14,6 @@ Dataset loaded with 100,000 rows and 30 columns.
    Test: 20,000 samples
    Baseline (predict majority): 0.767
 
-
 ## Creating features using ONLY training data...
   Added borough_risk (no leakage)
   Added factor_risk (no leakage)
@@ -27,10 +26,20 @@ Dataset loaded with 100,000 rows and 30 columns.
 ## Training models with class balancing...
 
 ## Model Performance Comparison:
+Training models with class balancing...
+C=0.01: Balanced Accuracy=0.5930
+C=0.05: Balanced Accuracy=0.5941
+C=0.1: Balanced Accuracy=0.5949
+C=0.5: Balanced Accuracy=0.5961
+C=1.0: Balanced Accuracy=0.5962
+C=2.0: Balanced Accuracy=0.5963
+C=5.0: Balanced Accuracy=0.5962
+
+Model Performance Comparison:
 
 Logistic Regression:
-   Accuracy: 0.6402
-   Balanced Accuracy: 0.5962
+   Accuracy: 0.6404
+   Balanced Accuracy: 0.5961
    AUC-ROC: 0.6313
 
 Random Forest:
@@ -48,17 +57,19 @@ AdaBoost:
    Balanced Accuracy: 0.5053
    AUC-ROC: 0.6327
 
+
+
 | Model | Accuracy | Balanced Accuracy | AUC-ROC |
 | ---- | ---- | ---- | ---- | 
-| Logistic Regression | 0.64025 | 0.596240 | 0.631324 |
+| Logistic Regression | 0.64045 | 0.596145 | 0.631324 |
 | Gradient Boosting | 0.64830 | 0.595788 | 0.635173 |
 | Random Forest | 0.72145 | 0.547577 | 0.597572 |
 | AdaBoost | 0.76745 | 0.505289 | 0.632668 |
 
  BEST MODEL: Logistic Regression
-   Balanced Accuracy: 0.5962
+   Balanced Accuracy: 0.5961
    AUC-ROC: 0.6313
 
 ------------------------------
 
-Conclusion: even after making changes to the existing parts, changing it up to use a RobustScaler, adding another model (AdaBoost), the results are relatively the same. It's still better than a fully random baseline of 50%, but we can definitely improve our predictive model. At this point, the only other thing we could do is try adding more modeling approaches.
+Conclusion: Since the logistic regression model was more common to be the best performing model, we made changes to it to see if we can improve it further. We tested different regularization strengths to figure out if and tweaks can make the performance better. There was minimal change, so we are currently stuck at a plateau. Will brainstrom what further improvements can be made.

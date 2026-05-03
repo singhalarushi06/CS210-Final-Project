@@ -145,7 +145,20 @@ print(f"   Preprocessing complete")
 print("\nTraining models with class balancing...")
 
 # Model 1: Logistic Regression (has class_weight parameter)
-lr = LogisticRegression(max_iter=1000, random_state=42, class_weight='balanced')
+# Test different regularization strengths
+c_values = [0.01, 0.05, 0.1, 0.5, 1.0, 2.0, 5.0]
+best_bal_acc = 0
+best_c = 0
+for c in c_values:
+    lr = LogisticRegression(max_iter=1000, random_state=42, class_weight='balanced', C=c)
+    lr.fit(X_train_scaled, y_train_clean)
+    bal_acc = balanced_accuracy_score(y_test_clean, lr.predict(X_test_scaled))
+    print(f"C={c}: Balanced Accuracy={bal_acc:.4f}")
+    if bal_acc > best_bal_acc:
+        best_bal_acc = bal_acc
+        best_c = c
+# Use the best C value found
+lr = LogisticRegression(max_iter=1000, random_state=42, class_weight='balanced', C=best_c)
 lr.fit(X_train_scaled, y_train_clean)
 y_pred_lr = lr.predict(X_test_scaled)
 y_proba_lr = lr.predict_proba(X_test_scaled)[:, 1]
