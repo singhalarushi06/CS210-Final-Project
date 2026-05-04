@@ -109,6 +109,29 @@ feature_columns = [
 if 'vehicle_risk_score' in train_df.columns:
     feature_columns.append('vehicle_risk_score')
 
+print("\n   Adding targeted features based on SQL query findings...")
+# Feature 1: Evening rush (4-7pm) with 2+ vehicles
+for df_temp in [train_df, test_df]:
+    df_temp['evening_rush_multi_vehicle'] = (
+        (df_temp['hour'] >= 16) & 
+        (df_temp['hour'] <= 19) & 
+        (df_temp['num_vehicles'] >= 2)
+    ).astype(int)
+feature_columns.append('evening_rush_multi_vehicle')
+# Feature 2: Failure to Yield
+for df_temp in [train_df, test_df]:
+    df_temp['failure_to_yield'] = (df_temp['factor_group'] == 'Failure to Yield').astype(int)
+feature_columns.append('failure_to_yield')
+# Feature 3: Vulnerable vehicles (bikes, motorcycles, scooters)
+vulnerable_types = ['BICYCLE', 'MOTORCYCLE', 'SCOOTER', 'MOTORBIKE', 'EBIKE']
+for df_temp in [train_df, test_df]:
+    if 'vehicle_type_code1' in df_temp.columns:
+        df_temp['vulnerable_vehicle'] = df_temp['vehicle_type_code1'].isin(vulnerable_types).astype(int)
+    else:
+        df_temp['vulnerable_vehicle'] = 0
+feature_columns.append('vulnerable_vehicle')
+print(f"   Added 3 targeted features (total features: {len(feature_columns)})")
+
 # Add categorical features as dummies
 categorical_cols = ['factor_group', 'borough']
 for col in categorical_cols:
