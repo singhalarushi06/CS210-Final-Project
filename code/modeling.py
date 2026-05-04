@@ -275,3 +275,14 @@ best_model = results[best_model_name]['model']
 print(f"\n BEST MODEL: {best_model_name}")
 print(f"   Balanced Accuracy: {comparison_df.iloc[0]['Balanced Accuracy']:.4f}")
 print(f"   AUC-ROC: {comparison_df.iloc[0]['AUC-ROC']:.4f}")
+
+# Save the model and the scaler for future use/predictions
+print("\nSaving the best model")
+
+joblib.dump(best_model, 'final_model/best_model.pk1')
+joblib.dump(scaler, 'final_model/scaler.pk1')
+joblib.dump(imputer, 'final_model/imputer.pk1')
+# also save the features
+joblib.dump(available_features, 'final_model/features.pk1')
+
+print("\nDone saving model")
