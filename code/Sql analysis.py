@@ -46,7 +46,7 @@ q01 = run_query("""
 """)
 print("\nQ1: crashes by hour")
 print(q01)
-q01.to_csv(BASE + "\\results\\q01_crashes_by_hour.csv", index=False)
+q01.to_csv(BASE + "\\results\\queries\\q01_crashes_by_hour.csv", index=False)
 
 # Q2: which single hour has the absolute worst average severity
 # interesting because it might not be rush hour
@@ -63,7 +63,7 @@ q02 = run_query("""
 """)
 print("\nQ2: deadliest hours")
 print(q02)
-q02.to_csv(BASE + "\\results\\q02_deadliest_hours.csv", index=False)
+q02.to_csv(BASE + "\\results\\queries\\q02_deadliest_hours.csv", index=False)
 
 # Q3: rush hour vs non rush hour. Are rush hour crashes actually more severe or just more frequent
 q03 = run_query("""
@@ -78,7 +78,7 @@ q03 = run_query("""
 """)
 print("\nQ3: rush hour vs not")
 print(q03)
-q03.to_csv(BASE + "\\results\\q03_rush_hour_vs_not.csv", index=False)
+q03.to_csv(BASE + "\\results\\queries\\q03_rush_hour_vs_not.csv", index=False)
 
 # Q4: late night vs everything else (are midnight crashes worse than the rest of the day)
 q04 = run_query("""
@@ -93,7 +93,7 @@ q04 = run_query("""
 """)
 print("\nQ4: late night vs normal")
 print(q04)
-q04.to_csv(BASE + "\\results\\q04_late_night_vs_normal.csv", index=False)
+q04.to_csv(BASE + "\\results\\queries\\q04_late_night_vs_normal.csv", index=False)
 
 # Q5: weekday vs weekend breakdown
 q05 = run_query("""
@@ -108,7 +108,7 @@ q05 = run_query("""
 """)
 print("\nQ5: weekday vs weekend")
 print(q05)
-q05.to_csv(BASE + "\\results\\q05_weekday_vs_weekend.csv", index=False)
+q05.to_csv(BASE + "\\results\\queries\\q05_weekday_vs_weekend.csv", index=False)
 
 # Q6: the dangerous combo of late night and weekend together
 # this is probably the worst possible time to be on the road
@@ -130,7 +130,7 @@ q06 = run_query("""
 """)
 print("\nQ6: night weekend combo")
 print(q06)
-q06.to_csv(BASE + "\\results\\q06_night_weekend_combo.csv", index=False)
+q06.to_csv(BASE + "\\results\\queries\\q06_night_weekend_combo.csv", index=False)
 
 # Q7: crashes by month. Are there seasonal patterns where certain months are worse than others
 q07 = run_query("""
@@ -145,7 +145,7 @@ q07 = run_query("""
 """)
 print("\nQ7: crashes by month")
 print(q07)
-q07.to_csv(BASE + "\\results\\q07_crashes_by_month.csv", index=False)
+q07.to_csv(BASE + "\\results\\queries\\q07_crashes_by_month.csv", index=False)
 
 
 # GEOGRAPHIC QUERIES
@@ -166,7 +166,7 @@ q08 = run_query("""
 """)
 print("\nQ8: crashes by borough")
 print(q08)
-q08.to_csv(BASE + "\\results\\q08_crashes_by_borough.csv", index=False)
+q08.to_csv(BASE + "\\results\\queries\\q08_crashes_by_borough.csv", index=False)
 
 # Q9: top 10 most dangerous borough + hour combos
 # where AND when are the worst crashes happening
@@ -186,7 +186,7 @@ q09 = run_query("""
 """)
 print("\nQ9: dangerous borough hour combos")
 print(q09)
-q09.to_csv(BASE + "\\results\\q09_dangerous_borough_hour.csv", index=False)
+q09.to_csv(BASE + "\\results\\queries\\q09_dangerous_borough_hour.csv", index=False)
 
 # Q10: which borough has the most late night crashes
 # interesting to see if manhattan nightlife shows up here
@@ -203,7 +203,7 @@ q10 = run_query("""
 """)
 print("\nQ10: borough late night crashes")
 print(q10)
-q10.to_csv(BASE + "\\results\\q10_borough_late_night_crashes.csv", index=False)
+q10.to_csv(BASE + "\\results\\queries\\q10_borough_late_night_crashes.csv", index=False)
 
 # Q11: which borough has the worst weekend crashes
 q11 = run_query("""
@@ -219,7 +219,7 @@ q11 = run_query("""
 """)
 print("\nQ11: borough weekend severity")
 print(q11)
-q11.to_csv(BASE + "\\results\\q11_borough_weekend_severity.csv", index=False)
+q11.to_csv(BASE + "\\results\\queries\\q11_borough_weekend_severity.csv", index=False)
 
 
 # CONTRIBUTING FACTOR QUERIES
@@ -240,7 +240,7 @@ q12 = run_query("""
 """)
 print("\nQ12: crashes by factor group")
 print(q12)
-q12.to_csv(BASE + "\\results\\q12_crashes_by_factor_group.csv", index=False)
+q12.to_csv(BASE + "\\results\\queries\\q12_crashes_by_factor_group.csv", index=False)
 
 # Q13: alcohol/drug crashes by hour. Now this should heavily spike late night
 # if this is true it strongly supports the night driving danger finding
@@ -257,7 +257,7 @@ q13 = run_query("""
 """)
 print("\nQ13: alcohol crashes by hour")
 print(q13)
-q13.to_csv(BASE + "\\results\\q13_alcohol_crashes_by_hour.csv", index=False)
+q13.to_csv(BASE + "\\results\\queries\\q13_alcohol_crashes_by_hour.csv", index=False)
 
 # Q14: distraction crashes by hour. Should spike during commute hours
 # distracted driving during rush hour vs alcohol at night comparison
@@ -274,7 +274,7 @@ q14 = run_query("""
 """)
 print("\nQ14: distraction crashes by hour")
 print(q14)
-q14.to_csv(BASE + "\\results\\q14_distraction_crashes_by_hour.csv", index=False)
+q14.to_csv(BASE + "\\results\\queries\\q14_distraction_crashes_by_hour.csv", index=False)
 
 # Q15: fatigue crashes by hour. Should spike in early morning 4am-6am
 # this tests the classic drowsy driving danger window
@@ -291,7 +291,7 @@ q15 = run_query("""
 """)
 print("\nQ15: fatigue crashes by hour")
 print(q15)
-q15.to_csv(BASE + "\\results\\q15_fatigue_crashes_by_hour.csv", index=False)
+q15.to_csv(BASE + "\\results\\queries\\q15_fatigue_crashes_by_hour.csv", index=False)
 
 # Q16: which factor group is most common in each borough
 # does brooklyn have more distraction while manhattan has more speeding
@@ -308,7 +308,7 @@ q16 = run_query("""
 """)
 print("\nQ16: factor group by borough")
 print(q16)
-q16.to_csv(BASE + "\\results\\q16_factor_group_by_borough.csv", index=False)
+q16.to_csv(BASE + "\\results\\queries\\q16_factor_group_by_borough.csv", index=False)
 
 
 # VEHICLE TYPE QUERIES
@@ -330,7 +330,7 @@ q17 = run_query("""
 """)
 print("\nQ17: severity by vehicle type")
 print(q17)
-q17.to_csv(BASE + "\\results\\q17_severity_by_vehicle_type.csv", index=False)
+q17.to_csv(BASE + "\\results\\queries\\q17_severity_by_vehicle_type.csv", index=False)
 
 # Q18: number of vehicles involved vs severity
 # does 3+ vehicles = much worse outcome
@@ -347,7 +347,7 @@ q18 = run_query("""
 """)
 print("\nQ18: num vehicles vs severity")
 print(q18)
-q18.to_csv(BASE + "\\results\\q18_num_vehicles_vs_severity.csv", index=False)
+q18.to_csv(BASE + "\\results\\queries\\q18_num_vehicles_vs_severity.csv", index=False)
 
 # Q19: truck crashes by borough - trucks tend to cause worse damage
 q19 = run_query("""
@@ -363,7 +363,7 @@ q19 = run_query("""
 """)
 print("\nQ19: truck crashes by borough")
 print(q19)
-q19.to_csv(BASE + "\\results\\q19_truck_crashes_by_borough.csv", index=False)
+q19.to_csv(BASE + "\\results\\queries\\q19_truck_crashes_by_borough.csv", index=False)
 
 
 # VULNERABLE ROAD USER QUERIES
@@ -383,7 +383,7 @@ q20 = run_query("""
 """)
 print("\nQ20: cyclist injuries by hour")
 print(q20)
-q20.to_csv(BASE + "\\results\\q20_cyclist_injuries_by_hour.csv", index=False)
+q20.to_csv(BASE + "\\results\\queries\\q20_cyclist_injuries_by_hour.csv", index=False)
 
 # Q21: pedestrian injuries by borough - where are pedestrians most at risk
 q21 = run_query("""
@@ -400,7 +400,7 @@ q21 = run_query("""
 """)
 print("\nQ21: pedestrian injuries by borough")
 print(q21)
-q21.to_csv(BASE + "\\results\\q21_pedestrian_injuries_by_borough.csv", index=False)
+q21.to_csv(BASE + "\\results\\queries\\q21_pedestrian_injuries_by_borough.csv", index=False)
 
 # Q22: cyclist crashes by borough - which borough is most dangerous for cyclists
 q22 = run_query("""
@@ -416,7 +416,7 @@ q22 = run_query("""
 """)
 print("\nQ22: cyclist crashes by borough")
 print(q22)
-q22.to_csv(BASE + "\\results\\q22_cyclist_crashes_by_borough.csv", index=False)
+q22.to_csv(BASE + "\\results\\queries\\q22_cyclist_crashes_by_borough.csv", index=False)
 
 
 # COMBINED/INTERACTION QUERIES
@@ -438,7 +438,7 @@ q23 = run_query("""
 """)
 print("\nQ23: alcohol night by borough")
 print(q23)
-q23.to_csv(BASE + "\\results\\q23_alcohol_night_by_borough.csv", index=False)
+q23.to_csv(BASE + "\\results\\queries\\q23_alcohol_night_by_borough.csv", index=False)
 
 # Q24: motorcycle crashes by hour - when do bikers crash most
 q24 = run_query("""
@@ -455,7 +455,7 @@ q24 = run_query("""
 """)
 print("\nQ24: motorcycle crashes by hour")
 print(q24)
-q24.to_csv(BASE + "\\results\\q24_motorcycle_crashes_by_hour.csv", index=False)
+q24.to_csv(BASE + "\\results\\queries\\q24_motorcycle_crashes_by_hour.csv", index=False)
 
 # Q25: speeding crashes by borough and hour
 # where and when do speeding crashes tend to happen
@@ -479,7 +479,7 @@ q25 = run_query("""
 """)
 print("\nQ25: speeding by borough and hour")
 print(q25)
-q25.to_csv(BASE + "\\results\\q25_speeding_by_borough_hour.csv", index=False)
+q25.to_csv(BASE + "\\results\\queries\\q25_speeding_by_borough_hour.csv", index=False)
 
 conn.close()
 print("All 25 queries done!")
