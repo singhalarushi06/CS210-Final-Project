@@ -1,64 +1,67 @@
 # Part 1: Data Selection + Sampling
 # CS210 - NYC Motor Vehicle Collisions
-# pulls data directly from the NYC Open Data API instead of a manual download
-# API docs: https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95
 
 import pandas as pd
 import requests
 import io
 import os
 
-# BASE points to the CS210-Final-Project folder regardless of where you run the script from
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# the base API endpoint for this dataset
-API_URL = "https://data.cityofnewyork.us/resource/h9gi-nx95.csv"
+# the NYC Open Data API endpoint for motor vehicle collisions
+url = "https://data.cityofnewyork.us/resource/h9gi-nx95.csv"
 
-# we need 100k rows total but the API caps at 50k per request without a token
-# so we make 2 requests of 50k each with different offsets and combine them
-BATCH_SIZE = 50_000
+# BATCH 1: fetch first 50k rows
+params1 = {
+    "$limit": 50000,
+    "$offset": 0,
+    "$order": "crash_date DESC"
+}
+response1 = requests.get(url, params=params1, timeout=60)
+print("Batch 1 status code:", response1.status_code)
 
-def fetch_batch(limit, offset):
-    # build the request with limit and offset params - this is how the Socrata API works
-    params = {
-        "$limit":  limit,
-        "$offset": offset,
-        "$order":  "crash_date DESC",  # get the most recent crashes first
-    }
-    print(f"  fetching rows {offset:,} to {offset + limit:,}...")
-    response = requests.get(API_URL, params=params, timeout=60)
+# parse the response into a dataframe
+batch1 = pd.read_csv(io.StringIO(response1.text), low_memory=False)
+print("Batch 1 rows:", len(batch1))
 
-    # if something goes wrong with the request, tell us what happened
-    if response.status_code != 200:
-        raise Exception(f"API request failed: {response.status_code} - {response.text[:200]}")
+# BATCH 2: fetch next 50k rows using offset
+params2 = {
+    "$limit": 50000,
+    "$offset": 50000,
+    "$order": "crash_date DESC"
+}
+response2 = requests.get(url, params=params2, timeout=60)
+print("Batch 2 status code:", response2.status_code)
 
-    # parse the CSV response directly into a dataframe
-    batch_df = pd.read_csv(io.StringIO(response.text), low_memory=False)
-    print(f"  got {len(batch_df):,} rows")
-    return batch_df
-
-print("Fetching NYC collision data from API...")
-print(f"Making 2 requests of {BATCH_SIZE:,} rows each\n")
-
-# batch 1: rows 0 to 50k
-batch1 = fetch_batch(limit=BATCH_SIZE, offset=0)
-
-# batch 2: rows 50k to 100k
-batch2 = fetch_batch(limit=BATCH_SIZE, offset=BATCH_SIZE)
+# parse the second batch
+batch2 = pd.read_csv(io.StringIO(response2.text), low_memory=False)
+print("Batch 2 rows:", len(batch2))
 
 # combine both batches into one dataframe
 df = pd.concat([batch1, batch2], ignore_index=True)
-print(f"\ncombined total: {len(df):,} rows")
+print("Combined total:", len(df))
 
-# shuffle the rows so we get a good random mix from both batches
+# quick look at the data
+print(df.head())
+
+# check columns
+print(df.columns.tolist())
+
+# shuffle so we get a random mix from both batches
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
-print(f"shuffled rows for randomness")
 
-# make sure the data folder exists before saving
+# document where this data came from (data provenance)
+provenance = {
+    "source": url,
+    "collected_on": pd.Timestamp.now(),
+    "collection_method": "2x GET requests using requests library (50k rows each)",
+    "total_rows": len(df),
+    "transformations": "Combined 2 batches, shuffled rows"
+}
+print(provenance)
+
+# save to csv for the next step
 os.makedirs(BASE + "\\data", exist_ok=True)
-
-# save to the same filename that data_cleaning.py expects - nothing downstream changes
 df.to_csv(BASE + "\\data\\Collisions_sample_100k.csv", index=False)
 print(f"\nsaved {len(df):,} rows -> data\\Collisions_sample_100k.csv")
-print(f"columns: {list(df.columns)}")
-print("\ndone! you can now run data_cleaning.py")
+print("done! you can now run data_cleaning.py")
