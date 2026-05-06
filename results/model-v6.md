@@ -65,8 +65,8 @@ AdaBoost:
 | Random Forest | 0.63755 | 0.606710 | 0.652992 |
 | AdaBoost | 0.65380 | 0.601423 | 0.658456 |
 
- BEST MODEL: Logistic Regression
-   Balanced Accuracy: 0.6176
+ BEST MODEL: Logistic Regression <br>
+   Balanced Accuracy: 0.6176 <br>
    AUC-ROC: 0.6641
 
 
