@@ -1,4 +1,4 @@
-# Part 5: SQL Analysis
+# Part 4: SQL Analysis
 # CS210 - NYC Motor Vehicle Collisions
 # runs SQL queries on the database and saves results to the results folder
 # run after data_cleaning.py
