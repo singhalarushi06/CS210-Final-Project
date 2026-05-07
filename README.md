@@ -6,6 +6,7 @@
 
 ## Project Overview
 The goal of this project was to predict the accident severity based on various time-related factors. We analyzed a sample of 100k (out of more than 2 million) NYC motor vehicle collisions to identify any patterns in the accident severity, and understand the impacts for further analysis of the severity of crashes.
+Important Note:  Specific numbers in this report, such as severity scores and crash counts, may shift slightly between runs. This is because the data is pulled live from the NYC Open Data API, which is updated continuously. The patterns and conclusions remain consistent regardless of which sample is used
 
 ## Dataset Source
 [NYC Motor Vehicle Collisions - Crashes](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95/about_data)
