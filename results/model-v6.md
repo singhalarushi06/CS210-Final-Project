@@ -3,60 +3,40 @@
 **NYC VEHICLE COLLISIONS - SEVERITY PREDICTION MODEL**
 
 ## Loading dataset...
-Dataset loaded with 100,000 rows and 32 columns.
+Dataset loaded with 100,000 rows and 32 columns. <br>
 
-   Severity distribution:
-   - Non-severe (0): 58,143 (58.1%)
-   - Severe (1): 41,857 (41.9%)
+   Severity distribution: <br>
+   - Non-severe (0): 58,143 (58.1%) <br>
+   - Severe (1): 41,857 (41.9%) <br>
 
 ## Spliting Data...
-   Training: 80,000 samples
-   Test: 20,000 samples
-   Baseline (predict majority): 0.581
+   Training: 80,000 samples <br>
+   Test: 20,000 samples <br>
+   Baseline (predict majority): 0.581 <br>
 
 ## Creating features using ONLY training data...
-  Added borough_risk (no leakage)
-  Added factor_risk (no leakage)
-  Added vehicle_risk_score (no leakage)
-  Added interaction features
+  Added borough_risk (no leakage) <br>
+  Added factor_risk (no leakage) <br>
+  Added vehicle_risk_score (no leakage) <br>
+  Added interaction features <br>
 
-   Adding targeted features based on SQL query findings...
-   Added 3 targeted features (total features: 16)
-   Total features after dummies: 29
-   Features used: 29
-   Feature matrix shape: (80000, 29)
-   Preprocessing complete
+   Adding targeted features based on SQL query findings... <br>
+   Added 3 targeted features (total features: 16) <br>
+   Total features after dummies: 29 <br>
+   Features used: 29 <br>
+   Feature matrix shape: (80000, 29) <br>
+   Preprocessing complete <br>
 
 ## Training models with class balancing...
-C=0.01: Balanced Accuracy=0.6162
-C=0.05: Balanced Accuracy=0.6176
-C=0.1: Balanced Accuracy=0.6174
-C=0.5: Balanced Accuracy=0.6171
-C=1.0: Balanced Accuracy=0.6172
-C=2.0: Balanced Accuracy=0.6172
-C=5.0: Balanced Accuracy=0.6172
+C=0.01: Balanced Accuracy=0.6162 <br>
+C=0.05: Balanced Accuracy=0.6176 <br>
+C=0.1: Balanced Accuracy=0.6174 <br>
+C=0.5: Balanced Accuracy=0.6171 <br>
+C=1.0: Balanced Accuracy=0.6172 <br>
+C=2.0: Balanced Accuracy=0.6172 <br>
+C=5.0: Balanced Accuracy=0.6172 <br>
 
 ## Model Performance Comparison:
-
-Logistic Regression:
-   Accuracy: 0.6319
-   Balanced Accuracy: 0.6176
-   AUC-ROC: 0.6641
-
-Random Forest:
-   Accuracy: 0.6375
-   Balanced Accuracy: 0.6067
-   AUC-ROC: 0.6530
-
-Gradient Boosting:
-   Accuracy: 0.6381
-   Balanced Accuracy: 0.6149
-   AUC-ROC: 0.6739
-
-AdaBoost:
-   Accuracy: 0.6538
-   Balanced Accuracy: 0.6014
-   AUC-ROC: 0.6585
 
 | Model | Accuracy | Balanced Accuracy | AUC-ROC |
 |----|----|----|----|
@@ -67,12 +47,12 @@ AdaBoost:
 
  BEST MODEL: Logistic Regression <br>
    Balanced Accuracy: 0.6176 <br>
-   AUC-ROC: 0.6641
+   AUC-ROC: 0.6641 <br>
 
 
 ------------------------------
 
-Conclusion: Added 3 more features based on the findings from the SQL queries. The features are described below, but the additions to the models helped the balanced accuracy improve even more.
-- dangerous combos: those in the evening hours with more vehicles
-- accidents where there was a failure to yield (shown to be highest in severity)
-- accidents involving vulnerable vehicles (bikes, mopeds, and motorcycles)
+Conclusion: Added 3 more features based on the findings from the SQL queries. The features are described below, but the additions to the models helped the balanced accuracy improve even more. <br>
+- dangerous combos: those in the evening hours with more vehicles <br>
+- accidents where there was a failure to yield (shown to be highest in severity) <br>
+- accidents involving vulnerable vehicles (bikes, mopeds, and motorcycles) <br>
