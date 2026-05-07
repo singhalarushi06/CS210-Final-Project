@@ -1,31 +1,31 @@
 borough,factor_group,total_crashes,avg_severity
-BRONX,Distraction,2638,0.642
-BRONX,Failure to Yield,970,1.051
-BRONX,Speeding,520,0.85
-BRONX,Alcohol/Drugs,284,0.496
-BRONX,Weather/Road,134,0.716
+BRONX,Distraction,2625,0.643
+BRONX,Failure to Yield,970,1.048
+BRONX,Speeding,514,0.848
+BRONX,Alcohol/Drugs,288,0.538
+BRONX,Weather/Road,135,0.711
 BRONX,Fatigue,43,0.535
-BROOKLYN,Distraction,6685,0.604
-BROOKLYN,Failure to Yield,2702,1.011
-BROOKLYN,Speeding,722,0.841
-BROOKLYN,Alcohol/Drugs,545,0.547
-BROOKLYN,Weather/Road,241,0.539
-BROOKLYN,Fatigue,154,0.786
-MANHATTAN,Distraction,3972,0.557
-MANHATTAN,Failure to Yield,1309,0.879
-MANHATTAN,Speeding,270,0.837
-MANHATTAN,Alcohol/Drugs,208,0.563
-MANHATTAN,Weather/Road,99,0.616
+BROOKLYN,Distraction,6666,0.606
+BROOKLYN,Failure to Yield,2692,1.015
+BROOKLYN,Speeding,722,0.821
+BROOKLYN,Alcohol/Drugs,542,0.561
+BROOKLYN,Weather/Road,239,0.536
+BROOKLYN,Fatigue,153,0.771
+MANHATTAN,Distraction,3991,0.558
+MANHATTAN,Failure to Yield,1304,0.88
+MANHATTAN,Speeding,267,0.828
+MANHATTAN,Alcohol/Drugs,210,0.586
+MANHATTAN,Weather/Road,100,0.61
 MANHATTAN,Fatigue,38,0.553
-QUEENS,Distraction,5616,0.546
-QUEENS,Failure to Yield,2403,0.957
-QUEENS,Speeding,613,0.62
-QUEENS,Alcohol/Drugs,507,0.546
+QUEENS,Distraction,5608,0.545
+QUEENS,Failure to Yield,2397,0.954
+QUEENS,Speeding,615,0.624
+QUEENS,Alcohol/Drugs,510,0.529
 QUEENS,Weather/Road,189,0.561
-QUEENS,Fatigue,127,0.488
-STATEN ISLAND,Distraction,875,0.534
-STATEN ISLAND,Failure to Yield,304,0.938
+QUEENS,Fatigue,129,0.481
+STATEN ISLAND,Distraction,873,0.527
+STATEN ISLAND,Failure to Yield,305,0.931
 STATEN ISLAND,Weather/Road,87,0.517
-STATEN ISLAND,Alcohol/Drugs,80,0.513
-STATEN ISLAND,Speeding,66,1.03
+STATEN ISLAND,Alcohol/Drugs,82,0.5
+STATEN ISLAND,Speeding,67,1.015
 STATEN ISLAND,Fatigue,32,0.5

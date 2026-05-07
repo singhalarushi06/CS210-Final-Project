@@ -1,5 +1,5 @@
 time_combo,total_crashes,avg_severity,severe_crashes,pct_severe
-Normal Hours + Weekend,21542,0.606,8929,41.4
-Normal Hours + Weekday,65941,0.601,28240,42.8
-Late Night + Weekend,5449,0.599,1982,36.4
-Late Night + Weekday,7068,0.595,2706,38.3
+Normal Hours + Weekend,21679,0.609,8983,41.4
+Late Night + Weekend,5464,0.602,1995,36.5
+Normal Hours + Weekday,65790,0.601,28188,42.8
+Late Night + Weekday,7067,0.593,2705,38.3
