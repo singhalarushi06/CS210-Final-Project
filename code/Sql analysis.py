@@ -30,9 +30,9 @@ def run_query(query, params=None):
 
 
 # TIME ANALYSIS QUERIES
-# these answer the core research question about when crashes are worst
+# these answer the  questions about when crashes are worst
 
-# Q1: total crashes and severity by hour
+# Q1: total crashes and severity of them by hour
 q01 = run_query("""
     SELECT 
         hour,
@@ -65,7 +65,7 @@ print("\nQ2: deadliest hours")
 print(q02)
 q02.to_csv(BASE + "\\results\\queries\\q02_deadliest_hours.csv", index=False)
 
-# Q3: rush hour vs non rush hour. Are rush hour crashes actually more severe or just more frequent
+# Q3: rush hour vs non rush hour 
 q03 = run_query("""
     SELECT 
         CASE WHEN is_rush_hour = 1 THEN 'Rush Hour' ELSE 'Not Rush Hour' END as time_period,
@@ -189,7 +189,6 @@ print(q09)
 q09.to_csv(BASE + "\\results\\queries\\q09_dangerous_borough_hour.csv", index=False)
 
 # Q10: which borough has the most late night crashes
-# interesting to see if manhattan nightlife shows up here
 q10 = run_query("""
     SELECT 
         borough,
@@ -294,7 +293,6 @@ print(q15)
 q15.to_csv(BASE + "\\results\\queries\\q15_fatigue_crashes_by_hour.csv", index=False)
 
 # Q16: which factor group is most common in each borough
-# does brooklyn have more distraction while manhattan has more speeding
 q16 = run_query("""
     SELECT 
         borough,
@@ -314,7 +312,7 @@ q16.to_csv(BASE + "\\results\\queries\\q16_factor_group_by_borough.csv", index=F
 # VEHICLE TYPE QUERIES
 # these show which vehicles are involved in the worst crashes
 
-# Q17: severity by vehicle type - motorcycles should be way worse than sedans
+# Q17: severity by vehicle type. Motorcycles should be way worse than sedans
 q17 = run_query("""
     SELECT 
         vehicle_type_code1,
@@ -333,7 +331,7 @@ print(q17)
 q17.to_csv(BASE + "\\results\\queries\\q17_severity_by_vehicle_type.csv", index=False)
 
 # Q18: number of vehicles involved vs severity
-# does 3+ vehicles = much worse outcome
+# does 3+ vehicles equal much worse outcome
 q18 = run_query("""
     SELECT 
         num_vehicles,
@@ -420,8 +418,7 @@ q22.to_csv(BASE + "\\results\\queries\\q22_cyclist_crashes_by_borough.csv", inde
 
 
 # COMBINED/INTERACTION QUERIES
-# these cross multiple dimensions and tend to give the most interesting findings
-
+# different factors interact to create especially bad crashes, these queries look at those combos
 # Q23: alcohol crashes late night by borough
 # where does drunk driving at night concentrate
 q23 = run_query("""
