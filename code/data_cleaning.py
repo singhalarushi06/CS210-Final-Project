@@ -9,13 +9,12 @@ import os
 # BASE points to the CS210-Final-Project folder regardless of where you run the script from
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# load the smaller dataset from the data selection step
-# this is already a random sample of the full data, so we can skip straight to cleaning
+# loading the smaller dataset from the data selection step
 print("loading dataset, give it a sec...")
 df = pd.read_csv(BASE + "\\data\\Collisions_sample_100k.csv", low_memory=False)
 print(f"size: {df.shape}")
 
-# rename columns IMMEDIATELY - csv comes with caps + spaces like "CRASH TIME"
+# renaming columns
 df.columns = df.columns.str.strip().str.lower().str.replace(" ", "_")
 print(f"columns found: {list(df.columns)}")
 
@@ -31,14 +30,13 @@ cols = [
     "vehicle_type_code1", "vehicle_type_code2",
     "vehicle_type_code_3", "vehicle_type_code_4", "vehicle_type_code_5",
 ]
-# only keep cols that exist - handles any naming differences in your csv
+
 cols = [c for c in cols if c in df.columns]
 df   = df[cols]
 
-# REGEX CLEANING SECTION
-# using patterns to catch and fix messy/invalid data
+# Cleaning using Regex
 
-# crash time: only keep valid HH:MM format
+# crash time: only keeping valid HH:MM format
 time_pattern = re.compile(r"^\d{1,2}:\d{2}$")
 def clean_time(t):
     t = str(t).strip()
@@ -47,13 +45,13 @@ def clean_time(t):
 df["crash_time"] = df["crash_time"].apply(clean_time)
 print(f"crash_time cleaned")
 
-# borough: remove digits and symbols, only keep valid names - catches typos like "Br00klyn" or "  QUEENS  "
+# borough: removing digits and symbols, only keeping valid names and catching typos like "Br00klyn" or "  QUEENS  "
 valid_boroughs = {"BRONX", "BROOKLYN", "MANHATTAN", "QUEENS", "STATEN ISLAND"}
-def clean_borough(val):
-    val = str(val).strip().upper()
-    val = re.sub(r"[^A-Z\s]", "", val)   # kill anything not a letter or space
-    val = re.sub(r"\s+", " ", val)        # collapse double spaces
-    return val if val in valid_boroughs else "Unknown"
+def clean_borough(bor):
+    bor = str(bor).strip().upper()
+    bor = re.sub(r"[^A-Z\s]", "", bor)   # removing anything not a letter or space
+    bor = re.sub(r"\s+", " ", bor)        # removing double spaces
+    return bor if bor in valid_boroughs else "Unknown"
 
 df["borough"] = df["borough"].apply(clean_borough)
 print(f"borough cleaned")
@@ -61,7 +59,7 @@ print(f"borough cleaned")
 # vehicle type: unify all the messy variations
 def normalize_vehicle(val):
     val = str(val).strip().upper()
-    val = re.sub(r"[^A-Z0-9\s]", " ", val)  # remove punctuation
+    val = re.sub(r"[^A-Z0-9\s]", " ", val)
     val = re.sub(r"\s+", " ", val).strip()
     patterns = [
         (r"\bSEDAN\b|\b4 DOOR\b|\b2 DOOR\b",          "SEDAN"),
@@ -82,7 +80,7 @@ if "vehicle_type_code1" in df.columns:
     df["vehicle_type_code1"] = df["vehicle_type_code1"].apply(normalize_vehicle)
     print(f"vehicle types cleaned")
 
-# contributing factor: strip junk whitespace and non-ascii
+# contributing factor: strip not needed whitespace and non-ascii
 def clean_factor(val):
     val = str(val).strip()
     val = re.sub(r"\s+", " ", val)          
@@ -109,7 +107,6 @@ if "latitude" in df.columns:
 
 # parse date and extract time features
 df["crash_date"] = pd.to_datetime(df["crash_date"], errors="coerce")
-# replace None with NaN first so to_datetime doesnt try to parse the string "None"
 df["crash_time"] = df["crash_time"].where(df["crash_time"].notna(), other=pd.NA)
 df["hour"]       = pd.to_datetime(df["crash_time"].astype(str), errors="coerce").dt.hour
 df["month"]      = df["crash_date"].dt.month
@@ -154,8 +151,7 @@ else:
     df["factor_group"] = "Other"
 print(f"factor groups: {df['factor_group'].value_counts().to_dict()}")
 
-# count how many vehicles were involved in the crash
-# more vehicles = usually worse crash, strong predictor
+# count how many vehicles were involved in the crash - more vehicles = usually worse crash
 vehicle_cols = [c for c in df.columns if "vehicle_type_code" in c]
 df["num_vehicles"] = df[vehicle_cols].notna().sum(axis=1)
 
@@ -164,7 +160,6 @@ numeric_cols = [c for c in df.columns if "number_of" in c]
 df[numeric_cols] = df[numeric_cols].fillna(0)
 
 # to improve the modeling, we are adjusting the metric of the SEVERITY SCORE
-# start by calculating the total number of injuries and fatalities
 df["total_injuries"] = (
     df["number_of_persons_injured"] +
     df["number_of_pedestrians_injured"] +
@@ -177,13 +172,13 @@ df["total_fatalities"] = (
     df["number_of_cyclist_killed"] +
     df["number_of_motorist_killed"]
 )
-# let's increase the score for fatalities a bit more than before
+# increasing the score for fatalities a bit more than before
 df["severity_score"] = (
     df["number_of_persons_injured"] * 1 +
     df["number_of_persons_killed"]  * 10
 )
-# let's modify the binary target variable
-# we say it is severe if it has 2 or more injuries, or at least 1 fatality - this is a more meaningful definition of severity than the original one which only looked at fatalities
+
+# we say it is severe if it has 2 or more injuries, or at least 1 fatality
 df["is_severe"] = (
     (df["total_injuries"] >= 2) | 
     (df["total_fatalities"] >= 1)
@@ -194,14 +189,12 @@ df = df.dropna(subset=["hour", "crash_date"])
 print(f"\nfinal shape after all cleaning: {df.shape}")
 print(f"severe crashes: {df['is_severe'].sum():,} / {len(df):,} ({df['is_severe'].mean():.1%})")
 
-# save it
 df.to_csv(BASE + "\\data\\collisions_clean.csv", index=False)
 print("\nsaved -> collisions_clean.csv")
 print(df[["crash_date", "hour", "is_rush_hour", "is_weekend",
           "factor_group", "num_vehicles", "severity_score"]].head(8))
 
 # SAVE TO SQLITE DATABASE
-# doing this here since the dataframe is already in memory, no need for a separate file
 import sqlite3
 
 db_path = BASE + "\\data\\collisions.db"
